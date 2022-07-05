@@ -1,4 +1,4 @@
-#include <stdlib.h>
+nclude <stdlib.h>
 
 #include <time.h>
 
@@ -49,3 +49,53 @@ int main(void)
 	       return (0);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	 
+
+
+
+
+
+
