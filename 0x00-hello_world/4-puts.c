@@ -1,30 +1,11 @@
 #include <stdio.h>
-
-
-
-/
-
- * main - entry point,
-
+/**
+ *main - entry point
  *
-
- * Return:  0
-
+ *Return: 0 after printing the function
  */
-
-
-
-int main(void)
-
+int main void(void)
 {
-
-  puts("\"Programming is like building a multilingual puzzle");
-
-  return (0);
-
+puts("\"Programming is like building a multilingual puzzle");
+return (0);
 }
-:wq
-:wq
-
-
-
