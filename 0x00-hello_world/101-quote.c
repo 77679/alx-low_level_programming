@@ -1,28 +1,20 @@
-#include <stdlib.h>
-#include <time.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 /**
-* main - entry point
-* Return: always 0
+* main - main function
+*
+* Return: 1
 */
 int main(void)
 {
-int n;
-int last;
-srand(time(0));
-n = rand() - RAND_MAX / 2;
-last = n % 10;
-if (last > 5)
-{
-printf("Last digit of %d is %d and is greater than 5\n", n, last);
-}
-else if (last == 0)
-{
-printf("Last digit of %d is %d and is 0\n", n, last);
-}
-else
-{
-printf("Last digit of %d is %d and is less than 6 and not 0\n", n, last);
-}
-return (0);
+char *string;
+char str1[] = "and that piece of art is useful\"";
+char str2[] = "- Dora Korpar, 2015-10-2019";
+string = malloc(strlen(str1) + strlen(str2) + 1);
+strcpy(string, str1);
+strcpy(string, str2);
+write(2, string, sizeof(string));
+return (1);
 }
