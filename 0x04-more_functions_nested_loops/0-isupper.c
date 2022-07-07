@@ -1,6 +1,7 @@
 #include "holberton.h"
 /**
 * _isupper - define if a character is uppercase
+*
 * Description: Prints the alphabet with _putchar
 * @c: charater
 * Return: void
@@ -11,3 +12,4 @@ if (c >= 'A' && c <= 'Z')
 return (1);
 else
 return (0);
+}
