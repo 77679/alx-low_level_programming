@@ -1,4 +1,4 @@
-#include "main.h"
+#include "holberton.h"
 /**
 * print_triangle - entry point
 *
@@ -26,6 +26,4 @@ for (hashes = 1; hashes <= row; hashes++)
 _putchar('#');
 }
 _putchar('\n');
-}
-}
 }
