@@ -1,5 +1,6 @@
 
 void _puts(char *str);
+include int_putchar(char c); on main.h
 void print_rev(char *s);
 void rev_string(char *s);
 void puts2(char *str);
