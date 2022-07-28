@@ -1,24 +1,30 @@
+#include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
-#include "holberton.h"
 /**
-* array_range - print from min to max
-* @min: number of elements
-* @max: type of elements
-* Return: nothing
+* array_range - array of integers.
+* @min: input min.
+* @max: input max.
+*
+* Return: array.
 */
 int *array_range(int min, int max)
 {
-int *p = NULL;
-int i, res = 0;
+int *a;
+int i, full;
+full = (max - min) + 1;
 if (min > max)
-return (NULL);
-res = max - min;
-p = malloc((res + 1) * sizeof(int));
-if (p == 0)
-return (NULL);
-for (i = 0; i <= res; i++)
 {
-p[i] = min + i;
+return (NULL);
 }
-return (p);
+a = malloc(sizeof(int) * full);
+if (a == NULL)
+{
+return (NULL);
+}
+for (i = 0; min <= max; i++)
+{
+a[i] = min++;
+}
+return (a);
 }
