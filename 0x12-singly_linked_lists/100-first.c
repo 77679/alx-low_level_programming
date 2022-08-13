@@ -1,17 +1,14 @@
-	section	.text
-	   global main     	;must be declared for linker (ld)
+#include <stdio.h>
 
-main:				;tells linker entry point
-	  mov rax, 1        	; write(
-	  mov rdi, 1        	;   STDOUT_FILENO,
-	  mov rsi, msg      	;   "Hello, world!\n",
-	  mov rdx, msglen   	;   sizeof("Hello, world!\n")
-	  syscall           	; );
+void first(void) __attribute__ ((constructor));
 
-	  mov rax, 60       	; exit(
-	  mov rdi, 0        	;   EXIT_SUCCESS
-	  syscall           	; );
-
-	section .rodata
-msg:		 db "Hello, Holberton", 10
-msglen:		 equ $ - msg
+/**
+ * first - prints something before main
+ *
+ * Return: void
+ */
+void first(void)
+{
+	printf("You're beat! and yet, you must allow,\n");
+	printf("I bore my house upon my back!\n");
+}
