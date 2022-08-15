@@ -1,41 +1,65 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 #include "lists.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
- * main - check the code for ALX students.
+ * _ra - reallocates memory for an array of pointers
+ * to the nodes in a linked list
+ * @list: the old list to append
+ * @size: size of the new list (always one more than the old list)
+ * @new: new node to add to the list
  *
- * Return: Always 0.
+ * Return: pointer to the new list
  */
-int main(void)
+listint_t **_ra(listint_t **list, size_t size, listint_t *new)
 {
-    listint_t *head;
-    listint_t *head2;
-    listint_t *node;
+	listint_t **newlist;
+	size_t i;
 
-    head2 = NULL;
-    add_nodeint(&head2, 0);
-    add_nodeint(&head2, 1);
-    add_nodeint(&head2, 2);
-    add_nodeint(&head2, 3);
-    add_nodeint(&head2, 4);
-    add_nodeint(&head2, 98);
-    add_nodeint(&head2, 402);
-    add_nodeint(&head2, 1024);
-    print_listint_safe(head2);
-    head = NULL;
-    node = add_nodeint(&head, 0);
-    add_nodeint(&head, 1);
-    add_nodeint(&head, 2);
-    add_nodeint(&head, 3);
-    add_nodeint(&head, 4);
-    node->next = add_nodeint(&head, 98);
-    add_nodeint(&head, 402);
-    add_nodeint(&head, 1024);
-    print_listint_safe(head);
-    free_listint_safe(&head2);
-    free_listint_safe(&head);
-    printf("%p, %p\n", (void *)head2, (void *)head);
-    return (0);
+	newlist = malloc(size * sizeof(listint_t *));
+	if (newlist == NULL)
+	{
+		free(list);
+		exit(98);
+	}
+	for (i = 0; i < size - 1; i++)
+		newlist[i] = list[i];
+	newlist[i] = new;
+	free(list);
+	return (newlist);
+}
+
+/**
+ * free_listint_safe - frees a listint_t linked list.
+ * @head: double pointer to the start of the list
+ *
+ * Return: the number of nodes in the list
+ */
+size_t free_listint_safe(listint_t **head)
+{
+	size_t i, num = 0;
+	listint_t **list = NULL;
+	listint_t *next;
+
+	if (head == NULL || *head == NULL)
+		return (num);
+	while (*head != NULL)
+	{
+		for (i = 0; i < num; i++)
+		{
+			if (*head == list[i])
+			{
+				*head = NULL;
+				free(list);
+				return (num);
+			}
+		}
+		num++;
+		list = _ra(list, num, *head);
+		next = (*head)->next;
+		free(*head);
+		*head = next;
+	}
+	free(list);
+	return (num);
 }
