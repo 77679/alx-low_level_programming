@@ -1,52 +1,39 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
 #include "holberton.h"
 
 /**
- * read_textfile - check the code for Holberton School students.
- * @filename: name of my file
- * @letters: number of the letters that i used
- * Return: Always 0.
- */
+* read_textfile - reads a text file and prints it to the POSIX standard output
+* @filename: pointer to the name of the file
+* @letters: number of letters it should read and print
+*Return: n of bytes it can read and print or NULL on failure
+*
+*if the file can not be opened or read, return 0
+*if filename is NULL return 0
+*if write fails or does not write the expected amount of bytes, return 0
+*/
+
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int ID = 0;
-	ssize_t WR = 0;
-	ssize_t len = 0;
-	char *buff = NULL;
+	int fd, len;
+	char *buffer;
 
-	if (filename != NULL)
-	{
-		buff = malloc(letters);
-		if (buff == NULL)
-		{
-			return (0);
-		}
+	if (filename == NULL)
+		return (0);
+	/* specify name, and type of operation to perform on the file */
+	fd = open(filename, O_RDONLY);  /* returns a file pointer */
+	if (fd == -1)
+		return (0);
 
-		ID = open(filename, O_RDONLY, 0600);
-		if (ID == -1)
-		{
-			free(buff);
-			return (0);
-		}
-		len = read(ID, buff, letters);
-		if (len == -1)
-		{
-			free(buff);
-			return (0);
-		}
-		WR = write(STDOUT_FILENO, buff, len);
-		if (WR == -1 || WR < len)
-		{
-			free(buff);
-			return (0);
-		}
-		close(ID);
-		free(buff);
-		return (WR);
-	}
-	return (0);
+	buffer = malloc(letters * sizeof(char));
+	if (buffer == NULL)
+		return (0);
+	/* n of bytes to read*/
+	len = read(fd, buffer, letters);
+	if (write(STDOUT_FILENO, buffer, len) != len)
+		return (0);
+
+	close(fd);
+	free(buffer);
+
+	return (len);
 }
